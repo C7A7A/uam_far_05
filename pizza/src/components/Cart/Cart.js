@@ -1,24 +1,23 @@
 import React from 'react'
+import { Card, Button } from 'react-bootstrap'
 
 export const Cart = () => {
   return (
-    <div>
-      <div>
-        <h2> Summary </h2>
-      </div>
-      <div>
-        summary table
-      </div>
-      <div>
-        summary price
-      </div>
-      <div>
-        <button> Back </button>
-        <button> Accept </button>
-      </div>
-      <div>
-        Accept modal
-      </div>
-    </div>
+    <Card>
+      <Card.Body>
+        <Card.Title> <h2> Summary </h2> </Card.Title>
+        <section>
+          summary table
+        </section>
+        <section>
+          summary price
+        </section>
+        <section className="col-12">
+          <Button className="float-end" variant="success">   
+            Accept 
+          </Button>
+        </section>
+      </Card.Body>
+    </Card>
   )
 }
