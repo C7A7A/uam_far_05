@@ -1,5 +1,5 @@
-import './App.scss';
-import { Nav } from './components/Nav'
+import './App.scss'
+import { Nav } from './components/Nav/Nav'
 import { Container } from 'react-bootstrap';
 
 function App() {

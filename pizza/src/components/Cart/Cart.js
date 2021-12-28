@@ -13,7 +13,7 @@ export const Cart = () => {
           summary price
         </section>
         <section className="col-12">
-          <Button className="float-end" variant="success">   
+          <Button className="float-end me-3" variant="success">   
             Accept 
           </Button>
         </section>
