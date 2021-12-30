@@ -1,8 +1,9 @@
 import './App.scss'
 import { Nav } from './components/Nav/Nav'
-import { Container } from 'react-bootstrap';
+import { Container } from 'react-bootstrap'
+// import { useState } from 'react'
 
-function App() {
+export const App = () => {
   return (
     <div className="App h-100 bg-light">
       <Container className="h-100">
@@ -11,5 +12,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

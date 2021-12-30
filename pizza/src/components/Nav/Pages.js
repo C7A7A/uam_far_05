@@ -4,9 +4,18 @@ import {
   Link
 } from "react-router-dom"
 import { Col } from 'react-bootstrap'
+import { useState } from 'react'
 
 export const Pages = () => {
   const pages = ['Welcome', 'Menu', 'Cart']
+
+  const hoverOn = (event) => {
+    event.target.style.color = "#157347"
+  }
+
+  const hoverOff = (event) => {
+    event.target.style.color = "#ffffff"
+  }
 
   return (
     <>
@@ -14,7 +23,14 @@ export const Pages = () => {
       pages.map((page) => {
         return (
           <Col key={page}>
-            <BootstrapNav.Link as={Link} to={`/${page === 'Welcome' ? '' : page}`} className="text-white navbar_pages_link"> 
+            <BootstrapNav.Link 
+              as={Link} 
+              to={`/${page === 'Welcome' ? '' : page}`} 
+              className='navbar_pages_link' 
+              style={{color: '#ffffff'}}
+              onMouseEnter={(event) => hoverOn(event)} 
+              onMouseLeave={(event) => hoverOff(event)}
+            > 
               {page.toUpperCase()}
             </BootstrapNav.Link>
           </Col>

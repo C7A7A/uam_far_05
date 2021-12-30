@@ -8,6 +8,7 @@ import { useState } from 'react'
 export const Menu = () => {
   const [pizza, setPizza] = useState("")
   const [ingredients, setIngredients] = useState([])
+  const [disabled, setDisabled] = useState('')
 
   const [show, setShow] = useState(false)
 
@@ -24,7 +25,9 @@ export const Menu = () => {
   }
 
   const handleAddToCart = () => {
-    console.log("XD")
+    setDisabled('disabled')
+
+    // setDisabled('')
   }
 
   return (
@@ -40,8 +43,9 @@ export const Menu = () => {
         <Pizzas 
           handleShow={handleshow}
         />
-        <Sauces />
-        <Button variant="success" className="float-end me-3" onClick={handleAddToCart}> Add to Cart </Button>
+        <Sauces 
+        />
+        <Button variant="success" className={`float-end me-3 ${disabled}`} onClick={handleAddToCart}> Add to Cart </Button>
       </Card.Body>
       
     </Card>

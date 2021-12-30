@@ -1,16 +1,24 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { ListGroup, ListGroupItem, Row, Col, Form } from 'react-bootstrap'
+import { ClipLoader } from 'react-spinners'
 
 export const Pizzas = ({handleShow}) => {
   const [pizzaList, setPizzaList] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const pizzaUrlAPI = 'http://localhost:3333/api/pizza'
 
-  useEffect(() => {
-    fetch(pizzaUrlAPI)
+  const fetchPizzas = async () => {
+    setLoading(true)
+    await fetch(pizzaUrlAPI)
       .then((response) => response.json())
       .then((data) => setPizzaList(data))
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchPizzas()
   }, [])
 
   const showIngredientList = (pizzaName, ingredientList) => {
@@ -23,7 +31,11 @@ export const Pizzas = ({handleShow}) => {
       <ListGroupItem as="li" className="bg-dark text-white">
         Pizzas
       </ListGroupItem>
-      {
+      {loading ? (
+        <section className="p-3">
+          <ClipLoader size="40px" color="#157347" />
+        </section>
+       ) : ( 
         pizzaList.map((pizza) => {
           return (
             <ListGroupItem as="li" key={pizza.id}>
@@ -35,7 +47,7 @@ export const Pizzas = ({handleShow}) => {
                     {pizza.price} PLN
                   </Col>
                   <Col className="align-self-center col-6">
-                    <span className="btn btn-outline-info" onClick={event => showIngredientList(pizza.name, pizza.ingredients)}>
+                    <span className="btn btn-outline-success" onClick={() => showIngredientList(pizza.name, pizza.ingredients)}>
                       Ingredient list
                     </span>
                   </Col>
@@ -46,6 +58,7 @@ export const Pizzas = ({handleShow}) => {
             </ListGroupItem>
           )
         })
+       ) 
       } 
     </ListGroup>
     </>

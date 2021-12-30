@@ -8,7 +8,7 @@ import { Pages } from './Pages'
 import { Cart } from '../Cart/Cart'
 import { Menu } from '../Menu/Menu'
 import { Welcome } from '../Welcome/Welcome'
-import { HandleWrongUrl } from '../HandleWrongUrl/HandleWrongUrl'
+import { HandleWrongUrl } from './HandleWrongUrl'
 import { Navbar, Row, Container } from 'react-bootstrap'
 
 export const Nav = () => {

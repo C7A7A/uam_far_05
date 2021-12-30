@@ -1,16 +1,24 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import { ListGroup, ListGroupItem, Row, Col, Form } from 'react-bootstrap'
+import { ClipLoader } from 'react-spinners'
 
 export const Sauces = () => {
   const [sauceList, setSauceList] = useState([])
+  const [loading, setLoading] = useState(false)
 
   const sauceUrlAPI = 'http://localhost:3333/api/sauce'
 
-  useEffect(() => {
-    fetch(sauceUrlAPI)
+  const fetchSauces = async () => {
+    setLoading(true)
+    await fetch(sauceUrlAPI)
       .then((response) => response.json())
       .then((data) => setSauceList(data))
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    fetchSauces()
   }, [])
 
   return (
@@ -19,7 +27,11 @@ export const Sauces = () => {
       <ListGroupItem as="li" className="bg-dark text-white">
         Sauces
       </ListGroupItem>
-      {
+      {loading ? (
+        <section className="p-3">
+          <ClipLoader size="40px" color="#157347" />
+        </section>
+       ) : ( 
         sauceList.map((sauce) => {
           return (
             <ListGroupItem as="li" key={sauce.id}>
@@ -37,6 +49,7 @@ export const Sauces = () => {
             </ListGroupItem>
           )
         })
+       )
       } 
     </ListGroup>
     </>
