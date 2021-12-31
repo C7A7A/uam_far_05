@@ -4,7 +4,6 @@ import {
   Link
 } from "react-router-dom"
 import { Col } from 'react-bootstrap'
-import { useState } from 'react'
 
 export const Pages = () => {
   const pages = ['Welcome', 'Menu', 'Cart']

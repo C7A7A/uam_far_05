@@ -8,23 +8,23 @@ export const Ingredients = ({ingredientList}) => {
 
   const ingredientsUrlAPI = 'http://localhost:3333/api/ingredient'
 
-  const fetchIngredients = async () => {
-    setLoading(true)
-    await fetch(ingredientsUrlAPI)
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((ingredient) => {
-          if (ingredientList.includes(ingredient.id)) {
-            setIngredients(prevState => [...prevState, ingredient])
-          }
-        })
-      })
-    setLoading(false)
-  }
-
   useEffect(() => {
+    const fetchIngredients = async () => {
+      setLoading(true)
+      await fetch(ingredientsUrlAPI)
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((ingredient) => {
+            if (ingredientList.includes(ingredient.id)) {
+              setIngredients(prevState => [...prevState, ingredient])
+            }
+          })
+        })
+      setLoading(false)
+    }
+
     fetchIngredients()
-  }, [])
+  }, [ingredientList])
 
   return (
     <>

@@ -2,13 +2,16 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { ListGroup, ListGroupItem, Row, Col, Form } from 'react-bootstrap'
 import { ClipLoader } from 'react-spinners'
+import { useFormContext } from 'react-hook-form'
 
 export const Pizzas = ({handleShow}) => {
   const [pizzaList, setPizzaList] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const pizzaUrlAPI = 'http://localhost:3333/api/pizza'
+  const { register } = useFormContext()
 
+  const pizzaUrlAPI = 'http://localhost:3333/api/pizza'
+  
   const fetchPizzas = async () => {
     setLoading(true)
     await fetch(pizzaUrlAPI)
@@ -26,7 +29,6 @@ export const Pizzas = ({handleShow}) => {
   }
 
   return (
-    <>
     <ListGroup as="ul" className="d-flex justify-content-start p-3">
       <ListGroupItem as="li" className="bg-dark text-white">
         Pizzas
@@ -35,7 +37,7 @@ export const Pizzas = ({handleShow}) => {
         <section className="p-3">
           <ClipLoader size="40px" color="#157347" />
         </section>
-       ) : ( 
+      ) : ( 
         pizzaList.map((pizza) => {
           return (
             <ListGroupItem as="li" key={pizza.id}>
@@ -52,15 +54,25 @@ export const Pizzas = ({handleShow}) => {
                     </span>
                   </Col>
                   <Col>
-                    <Form.Control type="number" defaultValue="0" min="0" className="text-center" />
-                  </Col> 
+                    <Form.Control 
+                      type="number" 
+                      defaultValue="0" 
+                      min="0" 
+                      className="text-center" 
+                      {...register(`pizzas.${pizza.name}.number`, { min: 0, max: 50 })} 
+                    />
+                  </Col>
+                  <Form.Control
+                    type="hidden"
+                    value={pizza.price}
+                    {...register(`pizzas.${pizza.name}.price`)}
+                  />
                 </Row>
             </ListGroupItem>
           )
         })
-       ) 
-      } 
+      ) 
+      }
     </ListGroup>
-    </>
   )
 }

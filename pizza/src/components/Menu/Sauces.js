@@ -2,10 +2,13 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import { ListGroup, ListGroupItem, Row, Col, Form } from 'react-bootstrap'
 import { ClipLoader } from 'react-spinners'
+import { useFormContext } from 'react-hook-form'
 
 export const Sauces = () => {
   const [sauceList, setSauceList] = useState([])
   const [loading, setLoading] = useState(false)
+
+  const { register } = useFormContext()
 
   const sauceUrlAPI = 'http://localhost:3333/api/sauce'
 
@@ -43,8 +46,19 @@ export const Sauces = () => {
                     {sauce.price} PLN
                   </Col>
                   <Col>
-                    <Form.Control type="number" defaultValue="0" min="0" className="text-center" />
-                  </Col> 
+                    <Form.Control 
+                      type="number" 
+                      defaultValue="0" 
+                      min="0" 
+                      className="text-center" 
+                      {...register(`sauces.${sauce.name}.number`)} 
+                    />
+                  </Col>
+                  <Form.Control
+                    type="hidden"
+                    value={sauce.price}
+                    {...register(`sauces.${sauce.name}.price`, { min: 0, max: 50 })}
+                  />
                 </Row>
             </ListGroupItem>
           )
