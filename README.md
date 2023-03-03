@@ -1,6 +1,8 @@
 # UAM_FAR
 
-5 semestr UAM Frameworki aplikacji webowych Angular i React
+5 semestr UAM - Frameworki aplikacji webowych Angular i React
+
+zadania + projekt w React
 
 ## Getting started
 
